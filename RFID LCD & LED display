@@ -1,0 +1,113 @@
+#include <Adafruit_LEDBackpack.h>
+
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <Wire.h>
+/*
+DisplayAuthorized()
+DisplayInvalid()
+DisplayCountdown()
+DisplayPrompt()
+*/
+
+LiquidCrystal_I2C lcd(0x20,16,2);
+
+void setup() {  // put your setup code here, to run once:
+  lcd.init();
+  lcd.backlight();
+  
+  }
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+}
+
+void DisplayAuthorized() {
+  
+  lcd.setCursor(6,0);
+  delay(1000);//1 second delay
+  lcd.print("ID IS");
+
+  lcd.setCursor(4,1);
+  delay(1000); //1 second delay
+  lcd.print("AUTHORIZED");
+  
+  delay(3000);//3 seconds delay
+  lcd.clear();
+}
+  
+void DisplayInvalid() {
+  
+  lcd.setCursor(6,0);
+  delay(1000);//1 second delay
+  lcd.print("ID IS");
+
+  lcd.setCursor(5,1);
+  delay(1000); //1 second delay
+  lcd.print("INVALID");
+  
+  delay(3000);//3 seconds delay
+  lcd.clear();
+}
+  
+ void DisplayCountdown() {
+  
+  lcd.setCursor(2,0);
+  delay(1000);//1 second delay
+  lcd.print("DOOR LATCH");
+    
+  lcd.setCursor(1,1);
+  delay(1000);//1 second delay
+  lcd.print("WILL CLOSE IN:");
+  
+  delay(3000);//3 seconds delay
+  lcd.clear();
+   
+  pinMode(11, OUTPUT);
+  digitalWrite(11, HIGH); 
+  lcd.setCursor(7,0);
+  lcd.print("THREE");
+  delay(1000);              
+  digitalWrite(11, LOW);   
+  delay(1000);
+  lcd.clear();
+  
+  pinMode(12, OUTPUT);
+  digitalWrite(12, HIGH);
+  lcd.setCursor(7,0);
+  lcd.print("TWO");
+  delay(1000);              
+  digitalWrite(12, LOW);   
+  delay(1000);
+  lcd.clear();
+  
+  pinMode(13, OUTPUT);
+  digitalWrite(13, HIGH);  
+  lcd.setCursor(7,0);
+  lcd.print("ONE");
+  delay(1000);              
+  digitalWrite(13, LOW);   
+  delay(1000);
+  lcd.clear();
+  
+  lcd.setCursor(5,0);
+  delay(1000); 
+  lcd.print("CLOSED");
+  
+  delay(3000);
+  lcd.clear();
+}
+
+void DisplayPrompt() {
+  lcd.setCursor(0,0);
+  lcd.print("Please scan RFID tag");
+  lcd.setCursor(0,1);
+  lcd.print("on the reader.");
+}
+
+void DisplayReading() {
+  lcd.setCursor(3,0);
+  lcd.print("READING");
+}
